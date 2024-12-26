@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Advisor Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #upload-section, #query-section {
+            margin-bottom: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Financial Advisor Bot</h1>
+        
+        <!-- Upload PDF Section -->
+        <div id="upload-section">
+            <h3>Upload your PDF</h3>
+            <input type="file" id="pdf-file" accept=".pdf" />
+            <button onclick="uploadPDF()">Upload PDF</button>
+        </div>
+        
+        <!-- Query Section -->
+        <div id="query-section" style="display:none;">
+            <h3>Ask a Query</h3>
+            <input type="text" id="query-input" placeholder="Enter your query here" />
+            <button onclick="askQuery()">Ask Query</button>
+        </div>
+        
+        <!-- Response Section -->
+        <div id="response"></div>
+    </div>
+
+    <script>
+        let pdfUploaded = false;
+
+        // Upload PDF to the backend
+        function uploadPDF() {
+            const fileInput = document.getElementById('pdf-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a PDF file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'PDF processed successfully') {
+                    alert('PDF uploaded successfully.');
+                    document.getElementById('upload-section').style.display = 'none';
+                    document.getElementById('query-section').style.display = 'block';
+                    pdfUploaded = true;
+                } else {
+                    alert('Error uploading PDF: ' + data.error);
+                }
+            })
+            .catch(error => {
+                alert('Error uploading PDF: ' + error);
+            });
+        }
+
+        // Ask Query and get the response
+        function askQuery() {
+            if (!pdfUploaded) {
+                alert('Please upload a PDF first.');
+                return;
+            }
+
+            const query = document.getElementById('query-input').value;
+            if (!query) {
+                alert('Please enter a query.');
+                return;
+            }
+
+            fetch('/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseDiv = document.getElementById('response');
+                if (data.response) {
+                    responseDiv.innerHTML = `<strong>Response:</strong> ${data.response}`;
+                } else {
+                    responseDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+                }
+            })
+            .catch(error => {
+                const responseDiv = document.getElementById('response');
+                responseDiv.innerHTML = `<strong>Error:</strong> ${error}`;
+            });
+        }
+    </script>
+</body>
+</html>
