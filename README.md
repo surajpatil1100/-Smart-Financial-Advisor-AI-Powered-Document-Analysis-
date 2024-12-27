@@ -38,7 +38,7 @@ Steps
 
 # Clone the repository:
 
-# git clone https://github.com/yourusername/financial-advisor-chatbot.git
+# git clone https://github.com/surajpatil1100/financial-advisor-chatbot.git
 cd financial-advisor-chatbot
 
 # Create and activate a virtual environment:
