@@ -4,7 +4,7 @@ Overview
 
 The Financial Advisor Chatbot is an intelligent tool designed to analyze uploaded financial documents, such as PDFs of balance sheets, income statements, or market analyses, and answer user queries based on the extracted content. The chatbot leverages Natural Language Processing (NLP) and machine learning to provide precise, context-aware responses, making financial data more accessible and actionable.
 
-# Key Features
+## Key Features
 
 PDF Upload and Parsing: Users can upload financial documents in PDF format for automated text extraction.
 
@@ -36,25 +36,25 @@ Virtual Environment (optional but recommended)
 
 Steps
 
-# Clone the repository:
+## Clone the repository:
 
-# git clone https://github.com/surajpatil1100/financial-advisor-chatbot.git
+## git clone https://github.com/surajpatil1100/financial-advisor-chatbot.git
 cd financial-advisor-chatbot
 
-# Create and activate a virtual environment:
+## Create and activate a virtual environment:
 
 python -m venv finance_bot_venv
 source finance_bot_venv/bin/activate  # On Windows: finance_bot_venv\Scripts\activate
 
-# Install required dependencies:
+## Install required dependencies:
 
 pip install -r requirements.txt
 
-# Run the Flask application:
+## Run the Flask application:
 
 python app/main.py
 
-# Open the application in your browser:
+## Open the application in your browser:
 
 http://127.0.0.1:5000
 
@@ -68,7 +68,7 @@ Get Answers: The chatbot will analyze your query and return the most relevant in
 
 Folder Structure
 
-# financial-advisor-chatbot/
+## financial-advisor-chatbot/
 |
 |-- app/
 |   |-- main.py        # Main application script
@@ -80,7 +80,7 @@ Folder Structure
 |-- requirements.txt   # Python dependencies
 |-- README.md          # Project documentation
 
-# Future Enhancements
+## Future Enhancements
 
 Support for Multiple Document Formats: Extend support for Excel, Word, and CSV files.
 
@@ -94,11 +94,11 @@ Contribution
 
 Contributions are welcome! To contribute:
 
-# Fork the repository.
+## Fork the repository.
 
-# Create a new branch for your feature or bug fix.
+ Create a new branch for your feature or bug fix.
 
-# Submit a pull request with a detailed description of your changes.
+ Submit a pull request with a detailed description of your changes.
 
 License
 
